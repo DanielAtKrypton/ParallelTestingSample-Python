@@ -35,15 +35,15 @@ jobs:
 
   - script: |
       echo $(pytestfiles)
-      pytest $(pytestfiles) --junitxml=junit/test-results-$(pytestfiles).xml --cov=. --cov-report=xml --cov-report=html
+      pytest $(pytestfiles) --junitxml=junit/$(pytestfiles)-results.xml --cov=. --cov-report=xml --cov-report=html
     displayName: 'Pytest'
     continueOnError: true
 
   - task: PublishTestResults@2
-    displayName: 'Publish Test Results **/test-results-*.xml'
+    displayName: 'Publish Test Results **/*-results.xml'
     inputs:
-      testResultsFiles: '**/test-results-*.xml'
-      testRunTitle: 'Python $(python.version)'
+      testResultsFiles: '**/*-results.xml'
+      testRunTitle: $(python.version)
     condition: succeededOrFailed()
 
   - task: PublishCodeCoverageResults@1

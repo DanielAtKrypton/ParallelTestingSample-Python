@@ -30,25 +30,26 @@ jobs:
     displayName: 'PowerShell Script to distribute tests'
 
   - script: |
+      pip install pytest>=4.6
       pip install pytest-azurepipelines pytest-cov
     displayName: 'Install Pytest dependencies'
 
   - script: |
       echo $(pytestfiles)
       pytest $(pytestfiles) --junitxml=junit/test-results-$(pytestfiles).xml --cov=. --cov-report=xml --cov-report=html
-    displayName: 'Pytest $(pytestfiles)'
+    displayName: 'Pytest "$(pytestfiles)"'
     continueOnError: true
 
   - task: PublishTestResults@2
-    displayName: 'Publish Test Results **/test-results-*.xml'
+    displayName: 'Publish Test Results **/test-results-"$(pytestfiles)".xml'
     inputs:
-      testResultsFiles: '**/test-results-*.xml'
+      testResultsFiles: '**/test-results-"$(pytestfiles)".xml'
       testRunTitle: 'Python $(python.version)'
     condition: succeededOrFailed()
 
   - task: PublishCodeCoverageResults@1
     inputs:
       codeCoverageTool: Cobertura
-      summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
-      reportDirectory: '$(System.DefaultWorkingDirectory)/**/htmlcov'
-    displayName: 'Publish code coverage results'
+      summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage-"$(pytestfiles)".xml'
+      reportDirectory: '$(System.DefaultWorkingDirectory)/**/htmlcov-"$(pytestfiles)"'
+    displayName: 'Publish "$(pytestfiles)" code coverage results'

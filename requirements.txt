@@ -8,7 +8,7 @@ gitdb2
 GitPython
 hypothesis
 isort
-lazy-object-proxy
+lazy-object-proxy==1.4.*
 lint
 mccabe
 more-itertools

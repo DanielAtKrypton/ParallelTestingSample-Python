@@ -1,6 +1,8 @@
 # Python test sample
 # Sample that demonstrates how to leverage the parallel jobs capability of Azure Pipelines to run python tests in parallel.
 # Parallelizing tests helps in reducing the time spent in testing and can speed up the pipelines significantly.
+variables:
+  disable.coverage.autogenerate: 'true'
 
 jobs:
 
@@ -35,3 +37,10 @@ jobs:
       testResultsFiles: '**/test-results.xml'
       testRunTitle: 'Python $(python.version)'
     condition: succeededOrFailed()
+
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: Cobertura
+      summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
+      reportDirectory: '$(System.DefaultWorkingDirectory)/**/htmlcov'
+    displayName: 'Publish code coverage results'

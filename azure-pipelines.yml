@@ -30,7 +30,6 @@ jobs:
     displayName: 'PowerShell Script to distribute tests'
 
   - script: |
-      pip install pytest>=4.6
       pip install pytest-azurepipelines pytest-cov
     displayName: 'Install Pytest dependencies'
 

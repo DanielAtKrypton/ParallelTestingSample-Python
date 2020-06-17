@@ -19,7 +19,11 @@ jobs:
       addToPath: true
       architecture: 'x64'
 
-  - script: 'python -m pip install --upgrade pip && pip install -r $(System.DefaultWorkingDirectory)/requirements.txt' 
+  - script: |
+      python -m pip install --upgrade pip setuptools wheel
+    displayName: 'Install tools'
+
+  - script: 'pip install -r $(System.DefaultWorkingDirectory)/requirements.txt' 
     displayName: 'Install dependencies'
 
   - powershell: ./DistributeTests.ps1 
@@ -28,7 +32,7 @@ jobs:
   - script: |
       pip install pytest>=4.6
       pip install pytest-azurepipelines pytest-cov
-    displayName: 'Install dependencies'
+    displayName: 'Install pytest dependencies'
 
   - script: |
       echo $(pytestfiles)

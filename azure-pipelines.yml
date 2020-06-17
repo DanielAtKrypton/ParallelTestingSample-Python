@@ -9,13 +9,10 @@ jobs:
     vmImage: 'windows-latest'
   strategy:
     parallel: 3
-  matrix:
-    Python37:
-      python.version: '3.7'
 
   steps:
   - task: UsePythonVersion@0
-    displayName: 'Use Python 3.x'
+    displayName: 'Use Python 3.7'
 
   - script: 'python -m pip install --upgrade pip && pip install -r $(System.DefaultWorkingDirectory)/requirements.txt' 
     displayName: 'Install dependencies'

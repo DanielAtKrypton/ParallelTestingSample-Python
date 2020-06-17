@@ -5,7 +5,7 @@
 jobs:
 
 - job: 'ParallelTesting'
-  pool: 'Hosted VS2017'
+  pool: 'windows-latest'
   strategy:
     parallel: 3
 

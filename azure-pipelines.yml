@@ -6,7 +6,7 @@ jobs:
 
 - job: 'ParallelTesting'
   pool:
-    vmImage: 'windows-latest'
+    vmImage: 'ubuntu-latest'
   strategy:
     parallel: 3
 

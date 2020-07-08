@@ -1,0 +1,9 @@
+pytest
+coverage
+gitdb2
+hypothesis
+rope
+selenium
+setuptools
+smmap2
+tox

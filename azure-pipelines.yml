@@ -23,7 +23,7 @@ jobs:
       python -m pip install --upgrade pip setuptools wheel
     displayName: 'Install tools'
 
-  - script: 'pip install -r $(System.DefaultWorkingDirectory)/requirements.txt' 
+  - script: 'pip install -r $(System.DefaultWorkingDirectory)/requirements_old.txt' 
     displayName: 'Install dependencies'
 
   - powershell: ./DistributeTests.ps1 

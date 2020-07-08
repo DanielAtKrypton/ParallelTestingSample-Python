@@ -33,7 +33,7 @@ class FirefoxTestCase(unittest.TestCase):
 
     def testOutlook(self):
         self.browser.get('http://www.outlook.com')
-        self.assertIn('Outlook', self.browser.title)
+        self.assertIn('Sign in to your Microsoft account', self.browser.title)
         time.sleep(2)
 
 
